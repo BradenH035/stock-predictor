@@ -55,22 +55,15 @@ for i in range(len(df)):
 # Calculate the difference between the predicted price and the actual price
 # Calculate the average difference between the predicted price and the actual price
 
-new_df = pd.DataFrame(index = range(0, len(df)), columns = ['Date', 'Close'])
-for i in range(len(df)):
-    new_df['Date'][i] = df['data'][i]['Date']
-    new_df['Close'][i] = df['data'][i]['Close']
+df1 = df.copy(deep=True)
+df2 = df.copy(deep=True)
 
-final_df = new_df.values
-new_df.index = new_df.Date
-new_df.drop('Date', axis=1, inplace=True)
 
-train_data = final_df[0:1800, :]
-valid_data = final_df[1800:, :]
+train_data = df2['data'][0].loc[0:1800, 'Close']
+valid_data = df2['data'][0].loc[1800:, 'Close']
 
-print(final_df)
-# issue, final_df is only dates
 scaler = MinMaxScaler(feature_range=(0, 1))
-scaled_data = scaler.fit_transform(final_df['Close'])
+scaled_data = scaler.fit_transform(df2['data'][0]['Close'])
 
 x_train, y_train = [], []
 
@@ -88,7 +81,7 @@ model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1],1)
 model.add(LSTM(units=50))
 model.add(Dense(1))
 
-inputs = new_df[len(new_df) - len(valid_data) - 60:].values
+inputs = df1[len(df1) - len(valid_data) - 60:].values
 inputs = inputs.reshape(-1,1)
 inputs  = scaler.transform(inputs)
 
@@ -106,8 +99,8 @@ predicted_closing_price = scaler.inverse_transform(predicted_closing_price)
 
 model.save('stock_predictor.h5')
 
-train_data = new_df[:1800]
-valid_data = new_df[1800:]
+train_data = df1[:1800]
+valid_data = df1[1800:]
 valid_data['Predictions'] = predicted_closing_price
 plt.plot(train_data['Close'])
 plt.plot(valid_data[['Close','Predictions']])
