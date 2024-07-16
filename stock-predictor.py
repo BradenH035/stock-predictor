@@ -4,9 +4,10 @@ import numpy as np
 from decimal import Decimal
 import matplotlib.pyplot as plt
 from keras.models import Sequential
-from keras.layers import LSTM,Dropout,Dense
+from keras.layers import LSTM, Dropout, Dense
 from sklearn.preprocessing import MinMaxScaler
 
+# Load data
 dir_path = './data'
 data = []
 csv_files = [f for f in os.listdir(dir_path) if f.endswith('.csv')]
@@ -21,7 +22,6 @@ df = pd.DataFrame(data)
 new_order = ['Date', 'Open', 'Close', 'Volume']
 def parse_dollar(dollar):
     return Decimal(dollar.replace('$', ''))
-
 
 for i in range(len(df)):
     df['data'][i]['Date'] = pd.to_datetime(df['data'][i]['Date'], format='%m/%d/%Y')
@@ -38,8 +38,7 @@ for i in range(len(df)):
     df['data'][i] = df['data'][i][new_order]
     df['data'][i].index = df['data'][i]['Date']
 
-
-# create plots for each of the stocks
+# Create plots for each of the stocks
 for i in range(len(df)):
     plt.plot(df['data'][i]['Date'], df['data'][i]['Close'], label=df['name'][i])
     plt.xlabel('Date')
@@ -47,62 +46,66 @@ for i in range(len(df)):
     plt.title('Closing Price for ' + df['name'][i])
     plt.savefig(f'./plots/{df["name"][i]}.png')
     plt.close()
+
+# Function to create training and testing datasets
+def create_dataset(stock_data, time_step=60):
+    X, y = [], []
+    for i in range(time_step, len(stock_data)):
+        X.append(stock_data[i-time_step:i, 0])
+        y.append(stock_data[i, 0])
+    return np.array(X), np.array(y)
+
+# Train a model for each stock
+models = {}
+for i in range(len(df)):
+    stock_name = df['name'][i]
+    stock_data = df['data'][i]['Close'].values
+    stock_data = stock_data.reshape(-1, 1)
     
-# Train a model to predict the stock price based on the closing prices from the last 7 days
-# Predict the closing price for the next day
-# Use the model to predict the closing price for the next day
-# Compare the predicted price to the actual price
-# Calculate the difference between the predicted price and the actual price
-# Calculate the average difference between the predicted price and the actual price
+    # Scale data
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    scaled_data = scaler.fit_transform(stock_data)
+    
+    # Split data into training and validation sets
+    train_size = int(len(scaled_data) * 0.8)
+    train_data = scaled_data[:train_size]
+    valid_data = scaled_data[train_size:]
+    
+    # Create datasets
+    x_train, y_train = create_dataset(train_data)
+    x_valid, y_valid = create_dataset(valid_data)
+    
+    # Reshape data to 3D for LSTM input
+    x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], 1)
+    x_valid = x_valid.reshape(x_valid.shape[0], x_valid.shape[1], 1)
+    
+    # Build LSTM model
+    model = Sequential()
+    model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+    model.add(LSTM(units=50))
+    model.add(Dense(1))
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    
+    # Train model
+    model.fit(x_train, y_train, epochs=20, batch_size=32, validation_data=(x_valid, y_valid))
+    
+    # Save model
+    models[stock_name] = model
 
-df1 = df.copy(deep=True)
-df2 = df.copy(deep=True)
+# Save the models dictionary if needed
+import os
+import pickle
 
-train_data = df2['data'][0].loc[0:1800, 'Close']
-valid_data = df2['data'][0].loc[1800:, 'Close']
-scaler = MinMaxScaler(feature_range=(0, 1))
-scaled_data = scaler.fit_transform(df2['data'][0]['Close'])
+# Create the directory if it does not exist
+os.makedirs('./models', exist_ok=True)
 
-x_train, y_train = [], []
+# Save the models dictionary
+with open('./models/stock_models.pkl', 'wb') as f:
+    pickle.dump(models, f)
 
-# 60 days ~= 2 months
-for i in range(60,len(train_data)):
-    x_train.append(scaled_data[i-60:i,0])
-    y_train.append(scaled_data[i,0])
+print("Models trained and saved successfully!")
 
-x_train, y_train = np.array(x_train), np.array(y_train)
-
-x_train = np.reshape(x_train, (x_train.shape[0],x_train.shape[1],1))
-
-model = Sequential()
-model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1],1)))
-model.add(LSTM(units=50))
-model.add(Dense(1))
-
-inputs = df1[len(df1) - len(valid_data) - 60:].values
-inputs = inputs.reshape(-1,1)
-inputs  = scaler.transform(inputs)
-
-model.compile(loss='mean_squared_error', optimizer='adam')
-model.fit(x_train, y_train, epochs=1, batch_size=1, verbose=2)
-
-X_test = []
-for i in range(60,inputs.shape[0]):
-    X_test.append(inputs[i-60:i,0])
-X_test = np.array(X_test)
-
-X_test = np.reshape(X_test, (X_test.shape[0],X_test.shape[1],1))
-predicted_closing_price = model.predict(X_test)
-predicted_closing_price = scaler.inverse_transform(predicted_closing_price)
-
-model.save('stock_predictor.h5')
-
-train_data = df1[:1800]
-valid_data = df1[1800:]
-valid_data['Predictions'] = predicted_closing_price
-plt.plot(train_data['Close'])
-plt.plot(valid_data[['Close','Predictions']])
-plt.show()
-
-
+# Load the models dictionary
+with open('./models/stock_models.pkl', 'rb') as f:
+    models = pickle.load(f)
 
