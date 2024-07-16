@@ -58,10 +58,8 @@ for i in range(len(df)):
 df1 = df.copy(deep=True)
 df2 = df.copy(deep=True)
 
-
 train_data = df2['data'][0].loc[0:1800, 'Close']
 valid_data = df2['data'][0].loc[1800:, 'Close']
-
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(df2['data'][0]['Close'])
 
