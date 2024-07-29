@@ -109,3 +109,67 @@ print("Models trained and saved successfully!")
 with open('./models/stock_models.pkl', 'rb') as f:
     models = pickle.load(f)
 
+# Predict the next day's closing price for each stock
+predictions = {}
+
+for stock_name, model in models.items():
+    matching_rows = df[df['name'] == stock_name]
+
+    # Initialize an empty list to collect 'Close' values
+    close_values = []
+
+    # Iterate over each DataFrame in the 'data' column
+    for index, row in matching_rows.iterrows():
+        data_df = row['data']  # This should be a DataFrame
+        if 'Close' in data_df.columns:
+            close_values.extend(data_df['Close'].values)
+
+    # Convert the list of 'Close' values to a NumPy array (if needed)
+    stock_data = np.array(close_values)
+    stock_data = stock_data.reshape(-1, 1)
+    
+    # Scale data
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    scaled_data = scaler.fit_transform(stock_data)
+    
+    # Get the last 60 day closing price values and scale the data
+    last_60_days = scaled_data[-60:]
+    
+    # Create an empty list and append past 60 days price data
+    X_test = []
+    X_test.append(last_60_days)
+    
+    # Convert the X_test data set to a numpy array and reshape the data
+    X_test = np.array(X_test)
+    X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+    
+    # Get the predicted scaled price
+    pred_price = model.predict(X_test)
+    
+    # Undo the scaling
+    pred_price = scaler.inverse_transform(pred_price)
+    
+    # Append the predicted price to the list
+    predictions[stock_name] = pred_price[0][0]
+
+# Compare to actual price
+for stock_name, pred_price in predictions.items():
+    matching_rows = df[df['name'] == stock_name]
+
+    # Initialize an empty list to collect 'Close' values
+    close_values = []
+
+    # Iterate over each DataFrame in the 'data' column
+    for index, row in matching_rows.iterrows():
+        data_df = row['data']  # This should be a DataFrame
+        if 'Close' in data_df.columns:
+            close_values.extend(data_df['Close'].values)
+
+    actual_price = close_values[-1]
+    print(f"Actual price for {stock_name} is: {actual_price}")
+    print(f"Predicted price for {stock_name} is: {pred_price}")
+
+    print(f"Error: {actual_price - Decimal(float(np.float32(pred_price)))}")
+
+
+
