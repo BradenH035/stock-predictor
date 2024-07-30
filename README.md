@@ -14,19 +14,7 @@ Simplified Breakdown:
 8) Load models
 9) Predict closing values & compare to actual data
 
-**Sample Output:**
-Actual price for starbucks is: 74.05
-Predicted price for starbucks is: 75.21141815185547
-Error: -1.16141815185546875
-Actual price for amazon is: 193.25
-Predicted price for amazon is: 190.73358154296875
-Error: 2.51641845703125
-Actual price for apple is: 210.62
-Predicted price for apple is: 207.17645263671875
-Error: 3.44354736328125
-Actual price for microsoft is: 425.27
-Predicted price for microsoft is: 418.9466857910156
-Error: 6.323314208984375
+Checkout the outfile.txt file to see results from most recent test
 
 Overall, the program works well and is relatively efficient given the amount of data passed through. Currently playing around with training variables to improve accuracy while ensuring that the data is not overtrained.
 
