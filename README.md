@@ -19,5 +19,5 @@ Checkout the outfile.txt file to see results from most recent test
 Overall, the program works well and is relatively efficient given the amount of data passed through. Currently playing around with training variables to improve accuracy while ensuring that the data is not overtrained.
 
 The next step will be to test this against real time data and see how it holds up. 
-I have always enjoyed numbers and found the stock market interesting. My personal goal with this project is to gain a better understanding of the stock market and machine learning. I have always been impressed with the people
+My goal with this project is to gain a better understanding of the stock market and machine learning. I have always been impressed with the people
 that are proficient in the stock market, as it seems so complex and, at times, random. I learned that there is a cause behind each fluctuation and that it can be predict, to some degree.
