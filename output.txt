@@ -1,0 +1,4 @@
+Actual price for microsoft is: 425.27
+Predicted price for microsoft is: 412.19488525390625
+Error: 13.07511474609375
+
