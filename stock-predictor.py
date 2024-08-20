@@ -109,7 +109,7 @@ for h_name, h_days in horizons.items():
         model.compile(optimizer='adam', loss='mean_squared_error')
         
         # Train/save model
-        model.fit(x_train, y_train, epochs=12, batch_size=60, validation_data=(x_valid, y_valid))
+        model.fit(x_train, y_train, epochs=12, batch_size=40, validation_data=(x_valid, y_valid))
         models[h_name][stock_name] = model
 
 

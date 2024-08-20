@@ -1,27 +1,27 @@
 Predictions for 1_day:
-starbucks: Predicted 1_day price: 81.91167449951172
-amazon: Predicted 1_day price: 166.4279022216797
-apple: Predicted 1_day price: 195.26622009277344
-microsoft: Predicted 1_day price: 382.4790344238281
+starbucks: Predicted 1_day price: 82.32011413574219
+amazon: Predicted 1_day price: 170.42935180664062
+apple: Predicted 1_day price: 215.56605529785156
+microsoft: Predicted 1_day price: 410.0304260253906
 
 
 Predictions for 1_week:
-starbucks: Predicted 1_week price: 82.20854949951172
-amazon: Predicted 1_week price: 165.67770385742188
-apple: Predicted 1_week price: 215.3941650390625
-microsoft: Predicted 1_week price: 414.6503601074219
+starbucks: Predicted 1_week price: 80.09342193603516
+amazon: Predicted 1_week price: 171.8867645263672
+apple: Predicted 1_week price: 214.56787109375
+microsoft: Predicted 1_week price: 407.2298889160156
 
 
 Predictions for 1_month:
-starbucks: Predicted 1_month price: 89.53158569335938
-amazon: Predicted 1_month price: 151.8575897216797
-apple: Predicted 1_month price: 219.54415893554688
-microsoft: Predicted 1_month price: 439.9732666015625
+starbucks: Predicted 1_month price: 80.47579956054688
+amazon: Predicted 1_month price: 166.0618438720703
+apple: Predicted 1_month price: 210.01840209960938
+microsoft: Predicted 1_month price: 412.6028747558594
 
 
 Actual price for starbucks is: 92.30
-Predicted price for starbucks is: 81.91167449951172
-Error: 10.38832550048828125
+Predicted price for starbucks is: 82.32011413574219
+Error: 9.9798858642578125
 Change in price from yesterday: -2.51
 Change in price from last week: 17.21
 Change in price from last month: 19.55
@@ -32,8 +32,8 @@ Points for starbucks: 1
 
 
 Actual price for amazon is: 178.22
-Predicted price for amazon is: 166.4279022216797
-Error: 11.7920977783203125
+Predicted price for amazon is: 170.42935180664062
+Error: 7.790648193359375
 Change in price from yesterday: 1.16
 Change in price from last week: 11.28
 Change in price from last month: -21.12
@@ -45,8 +45,8 @@ Points for amazon: 2
 
 
 Actual price for apple is: 225.89
-Predicted price for apple is: 195.26622009277344
-Error: 30.6237799072265625
+Predicted price for apple is: 215.56605529785156
+Error: 10.3239447021484375
 Change in price from yesterday: -0.16
 Change in price from last week: 9.65
 Change in price from last month: -2.79
@@ -57,8 +57,8 @@ Points for apple: -1
 
 
 Actual price for microsoft is: 421.53
-Predicted price for microsoft is: 382.4790344238281
-Error: 39.050965576171875
+Predicted price for microsoft is: 410.0304260253906
+Error: 11.499573974609375
 Change in price from yesterday: 3.06
 Change in price from last week: 15.51
 Change in price from last month: -38.01
