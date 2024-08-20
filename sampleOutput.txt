@@ -1,0 +1,46 @@
+Actual price for starbucks is: 74.05
+Predicted price for starbucks is: 75.336669921875
+Error: -1.286669921875
+Change in price from yesterday: 0.73
+Change in price from last week: -0.14
+Change in price from last month: -6.19
+Price has been fluctuating over the past week
+Price has been fluctuating over the past month
+That concludes information for: starbucks
+Points for starbucks: -1
+
+
+Actual price for amazon is: 193.25
+Predicted price for amazon is: 191.2303466796875
+Error: 2.0196533203125
+Change in price from yesterday: -4.60
+Change in price from last week: 7.15
+Change in price from last month: 9.62
+Price has been fluctuating over the past week
+Price has been fluctuating over the past month
+That concludes information for: amazon
+Points for amazon: 1
+
+
+Actual price for apple is: 210.62
+Predicted price for apple is: 210.63746643066406
+Error: -0.0174664306640625
+Change in price from yesterday: -3.48
+Change in price from last week: 0.94
+Change in price from last month: 20.78
+Price has been fluctuating over the past week
+Price has been fluctuating over the past month
+That concludes information for: apple
+Points for apple: 1
+
+
+Actual price for microsoft is: 425.27
+Predicted price for microsoft is: 426.9447021484375
+Error: -1.6747021484375
+Change in price from yesterday: 6.87
+Change in price from last week: -15.10
+Change in price from last month: -16.31
+Price has been fluctuating over the past week
+Price has been fluctuating over the past month
+That concludes information for: microsoft
+Points for microsoft: -1
