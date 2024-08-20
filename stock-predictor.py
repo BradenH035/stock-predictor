@@ -8,6 +8,7 @@ from keras.layers import LSTM, Dropout, Dense
 from sklearn.preprocessing import MinMaxScaler
 import os
 import pickle
+import math
 
 # Load data
 dir_path = './data'
@@ -51,7 +52,8 @@ for i in range(len(df)):
     plt.close()
 
 # Function to create training and testing datasets for multi-step predictions
-def create_dataset(stock_data, time_step=60, prediction_horizon=1):
+def create_dataset(stock_data, time_step, prediction_horizon=1):
+    time_step = int(math.ceil(time_step))
     X, y = [], []
     for i in range(time_step, len(stock_data) - prediction_horizon + 1):
         X.append(stock_data[i-time_step:i, 0])
@@ -84,7 +86,7 @@ for h_name, h_days in horizons.items():
 
         # Scale data
         scaler = MinMaxScaler(feature_range=(0, 1))
-        scaled_data = scaler.fit_transform(stock_data)
+        scaled_data = scaler.fit_transform(weighted_stock_data)
         
         # Split data into training and validation sets
         train_size = int(len(scaled_data) * 0.8)
@@ -92,8 +94,8 @@ for h_name, h_days in horizons.items():
         valid_data = scaled_data[train_size:]
         
         # Create datasets for the specified prediction horizon
-        x_train, y_train = create_dataset(train_data, time_step=90, prediction_horizon=h_days)
-        x_valid, y_valid = create_dataset(valid_data, time_step=90, prediction_horizon=h_days)
+        x_train, y_train = create_dataset(train_data, time_step=60 * math.sqrt(h_days), prediction_horizon=h_days)
+        x_valid, y_valid = create_dataset(valid_data, time_step=60 * math.sqrt(h_days), prediction_horizon=h_days)
         
         # Reshape data to 3D (for LSTM input)
         x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], 1)
@@ -107,7 +109,7 @@ for h_name, h_days in horizons.items():
         model.compile(optimizer='adam', loss='mean_squared_error')
         
         # Train/save model
-        model.fit(x_train, y_train, epochs=20, batch_size=32, validation_data=(x_valid, y_valid))
+        model.fit(x_train, y_train, epochs=12, batch_size=60, validation_data=(x_valid, y_valid))
         models[h_name][stock_name] = model
 
 
@@ -166,7 +168,8 @@ for h_name in horizons.keys():
     print("\n")
    
 # Get the actual price for a stock
-for stock_name, pred_price in predictions.items():
+dayHoriz = '1_day'
+for stock_name, pred_price in predictions[dayHoriz].items():
     matching_rows = df[df['name'] == stock_name]
 
     close_values = []
@@ -175,7 +178,6 @@ for stock_name, pred_price in predictions.items():
         data_df = row['data']
         if 'Close' in data_df.columns:
             close_values.extend(data_df['Close'].values)
-
     actual_price = close_values[-1]
     prev_day_price = close_values[-2]
     last_week_price = close_values[-7]
