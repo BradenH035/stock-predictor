@@ -65,7 +65,7 @@ def apply_weighting(data, decay_rate=0.995):
     Apply exponential decay to the input data, giving less weight to older data points.
     UNUSED AS OF NOW
     """
-    weights = [Decimal(decay_rate)**Decimal(i) for i in range(len(data))]
+    weights = [Decimal(decay_rate)*Decimal(i) for i in range(len(data))]
     weights = np.array(weights[::-1]).reshape(-1, 1)
     
     weighted_data = np.array([data[i] * weights[i][0] for i in range(len(data))])

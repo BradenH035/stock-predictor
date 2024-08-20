@@ -1,3 +1,0 @@
-Screenshots of variations in training/testing to acheive best accuracy
-e# = number of epochs
-bs# = batch size
