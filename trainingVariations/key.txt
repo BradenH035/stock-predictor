@@ -1,6 +1,0 @@
-Screenshots of variations in training/testing to acheive best accuracy
-w# = weighted --> older data have less of an impact than newer data; the # is 0.#
-                0.99 --> each value has 0.99 of the previous weight 
-
-e# = number of epochs
-bs# = batch size

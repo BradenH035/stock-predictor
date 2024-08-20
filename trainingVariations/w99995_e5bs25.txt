@@ -1,0 +1,68 @@
+Predictions for 1_day:
+starbucks: Predicted 1_day price: 82.16280364990234
+amazon: Predicted 1_day price: 171.60232543945312
+apple: Predicted 1_day price: 215.5024871826172
+microsoft: Predicted 1_day price: 413.6148986816406
+
+
+Predictions for 1_week:
+starbucks: Predicted 1_week price: 82.83931732177734
+amazon: Predicted 1_week price: 169.7828369140625
+apple: Predicted 1_week price: 213.78077697753906
+microsoft: Predicted 1_week price: 409.4862060546875
+
+
+Predictions for 1_month:
+starbucks: Predicted 1_month price: 81.19135284423828
+amazon: Predicted 1_month price: 172.6630859375
+apple: Predicted 1_month price: 207.4139862060547
+microsoft: Predicted 1_month price: 414.9830017089844
+
+
+Actual price for starbucks is: 92.30
+Predicted price for starbucks is: 82.16280364990234
+Error: 10.13719635009765625
+Change in price from yesterday: -2.51
+Change in price from last week: 17.21
+Change in price from last month: 19.55
+Price has been fluctuating over the past week
+Price has been fluctuating over the past month
+That concludes information for: starbucks
+Points for starbucks: 1
+
+
+Actual price for amazon is: 178.22
+Predicted price for amazon is: 171.60232543945312
+Error: 6.617674560546875
+Change in price from yesterday: 1.16
+Change in price from last week: 11.28
+Change in price from last month: -21.12
+Price has been increasing over the past week
+Major price increase over the past week
+Price has been fluctuating over the past month
+That concludes information for: amazon
+Points for amazon: 2
+
+
+Actual price for apple is: 225.89
+Predicted price for apple is: 215.5024871826172
+Error: 10.3875128173828125
+Change in price from yesterday: -0.16
+Change in price from last week: 9.65
+Change in price from last month: -2.79
+Price has been fluctuating over the past week
+Price has been decreasing over the past month
+That concludes information for: apple
+Points for apple: -1
+
+
+Actual price for microsoft is: 421.53
+Predicted price for microsoft is: 413.6148986816406
+Error: 7.915101318359375
+Change in price from yesterday: 3.06
+Change in price from last week: 15.51
+Change in price from last month: -38.01
+Price has been increasing over the past week
+Price has been fluctuating over the past month
+That concludes information for: microsoft
+Points for microsoft: 1

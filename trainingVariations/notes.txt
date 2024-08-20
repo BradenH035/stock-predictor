@@ -1,0 +1,14 @@
+Screenshots of variations in training/testing to acheive best accuracy
+w# = weighted --> older data have less of an impact than newer data; the # is decay rate
+e# = number of epochs
+bs# = batch size
+
+
+As of 8/20
+
+Most accurate (on average): w99995_e20bs25.txt
+--> very accurate, overtrained???
+Second most accurate: w9995_e12bs40.txt
+Best long-term (no extreme dips): w99995_e12bs60.txt
+Extreme accuracy: w99995_e12bs25.txt
+--> mixed accuracy, some amazing some very poor
