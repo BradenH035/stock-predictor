@@ -14,10 +14,11 @@ Simplified Breakdown:
 8) Load models
 9) Predict closing values & compare to actual data
 
-Checkout the outfile.txt file to see results from most recent test
+Checkout the trainingVariations folder to see results from most recent test
+
+
 
 Overall, the program works well and is relatively efficient given the amount of data passed through. Currently playing around with training variables to improve accuracy while ensuring that the data is not overtrained.
 
 The next step will be to test this against real time data and see how it holds up. 
-My goal with this project is to gain a better understanding of the stock market and machine learning. I have always been impressed with the people
-that are proficient in the stock market, as it seems so complex and, at times, random. I learned that there is a cause behind each fluctuation and that it can be predict, to some degree.
+My goal with this project is to gain a better understanding of the stock market and machine learning. I have always been impressed with the people that are proficient in the stock market, as it seems so complex and, at times, random. I learned that there is a cause behind each fluctuation and that it can be predict, to some degree.
