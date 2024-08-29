@@ -1,6 +1,6 @@
-This is a personal project based on starter code from https://data-flair.training/blogs/stock-price-prediction-machine-learning-project-in-python/
+This is a personal project inspired by the starter code from https://data-flair.training/blogs/stock-price-prediction-machine-learning-project-in-python/
 
-The goal was to create an application that would train models to predict the closing value of each stock. I used keras and scikit-learn within the program.
+My goal with this project is to gain a better understanding of the stock market and machine learning by creating an application that will train models to predict the closing value of each stock. I used keras and scikit-learn in the program.
 Data for each stock was gathered from Nasdaq.com (https://www.nasdaq.com/market-activity/quotes/historical)
 
 Simplified Breakdown:
@@ -14,11 +14,8 @@ Simplified Breakdown:
 8) Load models
 9) Predict closing values & compare to actual data
 
-Checkout the trainingVariations folder to see results from most recent test
+Checkout the "trainingVariations" folder to see results from recent testing!
 
+Overall, the program works well and is relatively efficient given the amount of data passed through. Currently experimenting with training variables to improve accuracy while ensuring that the data is not overtrained. Another challenge comes from aspects that are hard to quantify with numbers, such as the release of an exciting new product that causes stock prices to jump, or a major controversey that negatively impacts the stock price. I learned that, while it is possible to predict the stock prices within a high degree of accuracy solely using raw data, numbers alone are not enough to understand each change in price.
 
-
-Overall, the program works well and is relatively efficient given the amount of data passed through. Currently playing around with training variables to improve accuracy while ensuring that the data is not overtrained.
-
-The next step will be to test this against real time data and see how it holds up. 
-My goal with this project is to gain a better understanding of the stock market and machine learning. I have always been impressed with the people that are proficient in the stock market, as it seems so complex and, at times, random. I learned that there is a cause behind each fluctuation and that it can be predict, to some degree.
+The next step will be to test this on data in real time and see how it holds up. 
