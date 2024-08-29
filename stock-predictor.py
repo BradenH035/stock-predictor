@@ -60,7 +60,7 @@ def create_dataset(stock_data, time_step, prediction_horizon=1):
         y.append(stock_data[i + prediction_horizon - 1, 0])
     return np.array(X), np.array(y)
 
-def apply_weighting(data, decay_rate=0.99995):
+def apply_weighting(data, decay_rate=0.9995):
     """
     Apply linear decay to the input data, giving less weight to older data points.
     """
@@ -110,7 +110,7 @@ for h_name, h_days in horizons.items():
         model.compile(optimizer='adam', loss='mean_squared_error')
         
         # Train/save model
-        model.fit(x_train, y_train, epochs=18, batch_size=35, validation_data=(x_valid, y_valid))
+        model.fit(x_train, y_train, epochs=16, batch_size=25, validation_data=(x_valid, y_valid))
         models[h_name][stock_name] = model
 
 
